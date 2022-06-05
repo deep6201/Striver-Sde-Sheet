@@ -1,0 +1,74 @@
+  void setZeroes(vector<vector<int>>& matrix)
+    {
+        int m=matrix.size();
+        int n=matrix[0].size();//No. of columns
+        int x=2;
+        int y=2;
+        for(int i=0;i<m;i++)
+        {
+            if(matrix[i][0]==0)  // traversing 1st column and making y as 0
+            {
+                y=0;
+            }
+        }
+        for(int j=0;j<n;j++)
+        {
+            if(matrix[0][j]==0)//traversing 1st row and making x as 0
+            {
+                x=0;
+            }
+        }
+        
+        for(int i=1;i<m;i++)
+        {
+            for(int j=1;j<n;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    matrix[i][0]=0;//updating in dummy column or(updation in that row)
+                    matrix[0][j]=0;//updating in dummy row or(updation in that column)
+                }
+            }
+        }
+        
+        for(int j=1;j<n;j++)  // agar dummy row me 0 mil gya to pure column ko 0 banana h 
+        {
+            if(matrix[0][j]==0)
+            {
+                for(int i=1;i<m;i++)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        
+        for(int i=1;i<m;i++) // agar dummy column me 0 mil gya to pure row ko 0 banana h 
+        
+        {
+           if(matrix[i][0]==0) 
+           {
+               for(int j=1;j<n;j++)
+               {
+                   matrix[i][j]=0;
+               }
+           }
+        }
+        
+       if(x==0) // agar x=0 h to dummy row pure ko 0 karenge 
+       {
+           for(int j=0;j<n;j++)
+           {
+               matrix[0][j]=0;
+           }
+       }
+        if(y==0)
+        {
+            for(int i=0;i<m;i++)
+            {
+                matrix[i][0]=0;
+            }
+        }
+        
+        
+        
+    }

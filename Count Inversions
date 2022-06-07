@@ -1,0 +1,59 @@
+long long merge(long long *arr,int start,int mid,int end)
+{
+    long long temp[end-start+1];
+    long long ans=0;
+    int i=start;
+    int j=mid+1;
+    int k=0;
+    while(i<=mid && j<=end)
+    {
+        if(arr[i]<=arr[j])
+        {
+            temp[k++]=arr[i++];
+        }
+        else
+        {
+            temp[k++]=arr[j++];
+            ans+=mid-i+1;
+            
+        }
+    }
+        while(i<=mid)
+        {
+            temp[k++]=arr[i++];
+        }
+        while(j<=end)
+        {
+            temp[k++]=arr[j++];
+        }
+        
+        for (int m=start;m<=end;m++)
+        {
+            arr[m]=temp[m-start];
+        }
+    
+    return ans;
+    
+}
+long long mergesort(long long *arr,int start,int end)
+{
+    if(start==end)
+    {
+        return 0;
+    }
+    int mid=start+(end-start)/2;
+    long long ans=0;
+    ans+=mergesort(arr,start,mid);
+    ans+=mergesort(arr,mid+1,end);
+    ans+=merge(arr,start,mid,end);
+    return ans;
+}
+
+
+
+
+long long getInversions(long long *arr, int n)
+{
+  long long ans=mergesort(arr,0,n-1);
+    return ans;
+}
